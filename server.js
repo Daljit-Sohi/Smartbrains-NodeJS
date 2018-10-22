@@ -20,12 +20,6 @@ const db = knex({ //Connecting to our Postgres Database
  }
 });
 
-/** 
-db.select('*').from('users').then(data => {
-    console.log(data);
-})
-*/
-
 const app = express();
 
 //Middleware to Parse incoming/outgoing Data
@@ -64,12 +58,9 @@ const database = {
 } //end const -> database
 */
 
-/** 
-//Route Function
-app.get('/', (req, res)=>{
-    res.send(database.users);
-});
-*/
+
+//Home Route -->
+app.get('/', (req, res)=>{ res.send('Server is working'); });
 
 //Sign In Route
 app.post('/signin', (req, res) => signin.handleSignin(req, res, db, bcrypt));
@@ -86,20 +77,23 @@ app.put('/image', (req, res) => imageEntries.handleImage(req, res, db));
 //Handle API Call
 app.post('/imageurl', (req, res) => imageEntries.handleApiCall(req, res));
 
+
+
+
+
+//Environmental Variables
+const PORT = process.env.PORT;
+app.listen(PORT || 3000, () => {
+    console.log(`listening on port ${PORT}....`);
+});
+
+//on the Bash Terminal --> PORT=3000 node server.js`
+
 /** 
-        //Environmental Variables
-        const PORT = process.env.PORT;
-        app.listen(PORT, () => {
-            console.log(`listening on port ${PORT}....`);
-        });
-
-        //on the Bash Terminal --> PORT=3000 node server.js`
-*/
-
-
 app.listen(3001, () =>{
     console.log('running on port 3001.........');
 });
+*/
 
 
 /**
